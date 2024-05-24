@@ -1,0 +1,13 @@
+{% extends 'partials/base.html' %}
+{% block contenido %}
+  <h1>{{ usuario.full_name }}</h1>
+  <p>Primer Nombre: {{ usuario.primer_nombre }}</p>
+  <p>Segundo Nombre: {{ usuario.segundo_nombre }}</p>
+  <p>Primer Apellido: {{ usuario.primer_apellido }}</p>
+  <p>Segundo Apellido: {{ usuario.segundo_apellido }}</p>
+  <p>Fecha de Nacimiento: {{ usuario.fecha_nacimiento }}</p>
+  <p>Correo: {{ usuario.correo }}</p>
+  <p>Tipo de Documento: {{ usuario.get_tipo_documento_display }}</p>
+  <p>Documento: {{ usuario.documento }}</p>
+  <p>Estado: {{ usuario.estado }}</p>
+{% endblock %}

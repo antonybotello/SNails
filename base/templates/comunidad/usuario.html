@@ -1,0 +1,9 @@
+{% extends "partials/base.html" %}
+{% block contenido %}
+<h1>Lista de Usuarios</h1>
+<ul>
+    {% for usuario in usuarios %}
+    <li><a href="{% url 'usuario_detail_view' usuario.pk %}">{{ usuario.full_name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock contenido %}
