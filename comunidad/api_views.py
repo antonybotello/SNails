@@ -4,18 +4,18 @@ from rest_framework import status
 from django.shortcuts import render
 
 from comunidad.models import Usuario
-from .serializers import ItemSerializer
+from .serializers import UsuarioSerializer
 
 # Create your views here.
 @api_view(['GET', 'POST'])
 def usuario_list(request):
     if request.method == 'GET':
         usuarios = Usuario.objects.all()
-        serializer = ItemSerializer(usuarios, many=True)
+        serializer = UsuarioSerializer(usuarios, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = ItemSerializer(data=request.data)
+        serializer = UsuarioSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -29,11 +29,11 @@ def usuario_detail(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = ItemSerializer(usuario)
+        serializer = UsuarioSerializer(usuario)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = ItemSerializer(usuario, data=request.data)
+        serializer = UsuarioSerializer(usuario, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

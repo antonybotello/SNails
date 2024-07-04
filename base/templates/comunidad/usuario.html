@@ -1,9 +1,37 @@
-{% extends "partials/base.html" %}
+{% extends 'partials/base.html' %}
 {% block contenido %}
-<h1>Lista de Usuarios</h1>
-<ul>
-    {% for usuario in usuarios %}
-    <li><a href="{% url 'usuario_detail_view' usuario.pk %}">{{ usuario.full_name }}</a></li>
-    {% endfor %}
-</ul>
-{% endblock contenido %}
+  <div class="container">
+    <h1 class="my-4">Lista de Usuarios</h1>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Primer Nombre</th>
+          <th scope="col">Primer Apellido</th>
+        </tr>
+      </thead>
+      <tbody id="users-table-body">
+        <!-- Los datos de los usuarios se insertarán aquí -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $.ajax({
+        url: '/comunidad/api/usuarios/',
+        method: 'GET',
+        success: function (data) {
+          var usersTableBody = $('#users-table-body');
+          data.forEach(function (user) {
+            usersTableBody.append('<tr><td>' + user.id + '</td><td>' + user.primer_nombre + '</td><td>' + user.primer_apellido + '</td></tr>');
+          });
+        },
+        error: function () {
+          alert('Error al cargar los datos de los usuarios.');
+        }
+      });
+    });
+  </script>
+{% endblock %}
